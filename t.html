@@ -1,0 +1,121 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Settled — trip page</title><style>
+*{margin:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif}
+body{min-height:100vh;color:#111214;background:#f2f3f5;background-image:radial-gradient(420px at 12% -5%,rgba(255,90,60,.16),transparent 60%),radial-gradient(500px at 90% 12%,rgba(91,141,239,.15),transparent 60%),radial-gradient(460px at 8% 55%,rgba(245,166,35,.12),transparent 60%),radial-gradient(420px at 92% 78%,rgba(139,92,246,.10),transparent 60%);background-attachment:fixed}
+.wrap{max-width:540px;margin:0 auto;padding:24px 16px 80px}
+.card{background:rgba(255,255,255,.55);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.85);border-radius:24px;padding:18px;margin-bottom:14px;box-shadow:0 12px 28px rgba(0,0,0,.06)}
+h1{font-size:30px;margin:2px 0 4px}
+.sub{color:#6b7076;font-size:13px}
+.avatars{display:flex;margin-top:12px}
+.av{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.8);border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:16px;margin-right:-7px;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.pill{display:inline-block;padding:4px 10px;border-radius:99px;font-size:12px;font-weight:600}
+.pill.slot{background:rgba(255,90,60,.12);color:#ff5a3c}
+.pill.ddl{color:#f5a623;float:right}
+.q{font-size:17px;font-weight:700;margin:10px 0 12px}
+.opts{display:flex;gap:10px}
+.opt{flex:1;background:rgba(255,255,255,.6);border:1.5px solid rgba(255,255,255,.9);border-radius:16px;padding:10px}
+.opt.mine{border-color:#30a46c}
+.opt .img{height:64px;border-radius:12px;margin-bottom:8px;background:linear-gradient(135deg,rgba(91,141,239,.65),rgba(91,141,239,.3));display:flex;align-items:center;justify-content:center;font-size:26px}
+.opt:nth-child(2) .img{background:linear-gradient(135deg,rgba(48,164,108,.6),rgba(48,164,108,.28))}
+.opt .t{font-size:14px;font-weight:600}
+.opt .s{font-size:11px;color:#6b7076;margin:2px 0}
+.opt .p{font-size:13px;font-weight:700;margin:4px 0 1px}
+.opt .g{font-size:11px;color:#a3a8af}
+.opt .f{font-size:11px;color:#6b7076;margin:6px 0 8px;min-height:26px}
+.vbtn{width:100%;border:1px solid rgba(255,255,255,.9);border-radius:99px;padding:9px 0;font-size:13px;font-weight:600;background:rgba(255,255,255,.7);cursor:pointer}
+.vbtn.mine{background:#30a46c;color:#fff;border-color:#30a46c}
+.meta{font-size:12px;color:#6b7076;margin-top:10px}
+.rule{font-size:12px;color:#a3a8af;margin-top:6px}
+.receipt{display:flex;align-items:center;gap:10px;background:rgba(48,164,108,.08);border-radius:16px;padding:12px;font-size:13px}
+.receipt b{display:block;font-size:14px}
+.day{margin-bottom:10px}
+.dayhead{display:flex;align-items:center;gap:10px;cursor:pointer}
+.dn{width:38px;height:38px;border-radius:12px;background:rgba(255,90,60,.12);color:#ff5a3c;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.dt{font-weight:600;font-size:15px}
+.dd{font-size:12px;color:#6b7076}
+.place{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.5);border:1.5px solid rgba(255,255,255,.8);border-radius:14px;padding:10px;margin-top:8px}
+.place.locked{border-color:rgba(255,90,60,.3)}
+.place.draft{border-style:dashed;border-color:rgba(255,90,60,.6)}
+.pi{width:40px;height:40px;border-radius:12px;background:rgba(255,90,60,.13);display:flex;align-items:center;justify-content:center;font-size:17px}
+.pt{font-size:14px;font-weight:600}
+.ps{font-size:11px;color:#6b7076}
+.badge{margin-left:auto;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px}
+.badge.locked{background:#ff5a3c;color:#fff}
+.badge.draft{color:#ff5a3c;background:rgba(255,90,60,.1)}
+textarea{width:100%;border:1px solid rgba(255,255,255,.9);background:rgba(255,255,255,.65);border-radius:14px;padding:10px;font-size:14px;min-height:64px;resize:vertical}
+.btn{background:#111214;color:#fff;border:none;border-radius:99px;padding:12px 24px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.15)}
+.idbox{position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;z-index:9}
+.idcard{background:#fff;border-radius:24px;padding:24px;width:300px;text-align:center}
+.idcard input{width:100%;border:1px solid #e3e5e8;border-radius:12px;padding:10px;font-size:15px;margin:12px 0;text-align:center}
+.emojis{display:flex;justify-content:center;gap:8px;margin-bottom:14px}
+.em{width:40px;height:40px;border-radius:50%;background:#f2f3f5;border:2px solid transparent;font-size:19px;cursor:pointer}
+.em.sel{border-color:#ff5a3c}
+.spotted{background:rgba(48,164,108,.08);border-radius:12px;padding:10px;font-size:13px;margin-top:10px}
+.footer{text-align:center;margin-top:26px}
+.footer .small{font-size:11px;color:#a3a8af;margin-top:10px}
+.err{text-align:center;padding:80px 20px;font-size:16px;color:#6b7076}
+</style></head><body><div class="wrap" id="app"><div class="err">Loading…</div></div><script>
+var Q=new URLSearchParams(location.search),T=Q.get('t'),API='https://vczrpehzrpnqajpwoiah.supabase.co/functions/v1/hyper-apit';
+var ID=null;try{ID=JSON.parse(localStorage.getItem('settled_id')||'null')}catch(e){}
+var DATA=null,pendingVote=null;
+var ICONS={restaurant:'🍜',sight:'📷',hotel:'🛏',cafe:'☕️',shopping:'🛍',activity:'✨'};
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function load(){fetch(API+'?t='+encodeURIComponent(T||'')+'&data=1').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){DATA=d;render()}).catch(function(){document.getElementById('app').innerHTML='<div class="err"><b>This trip link is not active.</b><br><br>Ask the trip owner for a new link.</div>'})}
+function myName(){return ID?ID.name+' '+ID.emoji:null}
+function render(){
+var d=DATA,el=document.getElementById('app'),h='';
+var open=d.decisions.filter(function(x){return x.status==='open'});
+h+='<div style="margin-bottom:14px"><div class="sub">'+esc(d.trip.date_start||'')+' — shared with you</div><h1>'+esc(d.trip.name)+'</h1><div class="avatars">';
+d.members.forEach(function(m){h+='<div class="av" title="'+esc(m.display_name)+'">'+esc(m.avatar_emoji)+'</div>'});
+h+='</div></div>';
+if(open.length)h+='<div class="card" style="padding:14px 18px"><b>'+open.length+' decision'+(open.length>1?'s':'')+' need your take</b><div class="sub">Tap one — takes ten seconds.</div></div>';
+d.decisions.forEach(function(dec){
+h+='<div class="card"><span class="pill slot">'+esc(dec.slot)+'</span>';
+if(dec.status==='open'&&dec.deadline_label)h+='<span class="pill ddl">⏰ '+esc(dec.deadline_label)+'</span>';
+h+='<div class="q">'+esc(dec.question)+'</div>';
+if(dec.status==='settled'){h+='<div class="receipt">✅ <span><b>Settled</b>'+esc(dec.receipt||'')+'</span></div></div>';return}
+var opts=d.options.filter(function(o){return o.decision_id===dec.id});
+var vs=d.votes.filter(function(v){return v.decision_id===dec.id});
+var mine=null;vs.forEach(function(v){if(v.member_name===myName())mine=v.option_id});
+h+='<div class="opts">';
+opts.forEach(function(o){
+var isMine=mine===o.id;
+h+='<div class="opt'+(isMine?' mine':'')+'"><div class="img">'+(ICONS[(dec.slot.toLowerCase().indexOf('hotel')>-1)?'hotel':'restaurant']||'✨')+'</div><div class="t">'+esc(o.title)+'</div><div class="s">'+esc(o.subtitle||'')+'</div>';
+if(o.per_person_cents!=null)h+='<div class="p">≈ $'+(o.per_person_cents/100)+'/person</div><div class="g">your group of '+d.members.length+'</div>';
+h+='<div class="f">'+esc(o.fact_line||'')+'</div>';
+h+='<button class="vbtn'+(isMine?' mine':'')+'" onclick="vote(\''+dec.id+'\',\''+(isMine?'':o.id)+'\')">'+(isMine?'✓ You are in':'This one')+'</button></div>'});
+h+='</div><div class="meta">'+vs.length+' of '+d.members.length+' voted</div>';
+if(dec.deadline_label)h+='<div class="rule">ⓘ '+esc(dec.deadline_label)+' — no reply = fine with either</div>';
+h+='</div>'});
+h+='<div class="card"><b style="font-size:15px">The plan so far</b>';
+d.plans.forEach(function(p){
+var items=d.items.filter(function(i){return i.day_plan_id===p.id}).sort(function(a,b){return a.position-b.position});
+h+='<div class="day"><div class="dayhead"><div class="dn">D'+p.day_number+'</div><div><div class="dt">'+esc(p.theme||'')+'</div><div class="dd">'+esc(p.plan_date||'')+' · '+items.length+' places</div></div></div>';
+items.forEach(function(i){
+var c=null;d.cards.forEach(function(x){if(x.id===i.card_id)c=x});if(!c)return;
+h+='<div class="place '+i.state+'"><div class="pi">'+(ICONS[c.type]||'📍')+'</div><div><div class="pt">'+esc(c.title)+'</div><div class="ps">'+esc(c.area||'')+(c.save_count>1?' · saved '+c.save_count+'×':'')+(c.per_person_cents?' · $'+(c.per_person_cents/100)+'/pp':'')+'</div></div><span class="badge '+i.state+'">'+i.state+'</span></div>'});
+h+='</div>'});
+h+='</div>';
+h+='<div class="card"><b style="font-size:15px">Found something good too?</b><div class="sub" style="margin:4px 0 10px">Paste a link or text — it goes to the shared box.</div><textarea id="contrib" placeholder="https://tiktok.com/... or any text"></textarea><div id="spotted"></div><div style="text-align:center;margin-top:10px"><button class="btn" onclick="contribute()">Send to the box</button></div></div>';
+h+='<div class="footer"><button class="btn" onclick="alert(\'Waitlist coming soon — this is the three-gate demo.\')">Plan your own trip</button><div class="small">From saved to settled · human-checked with AI help</div></div>';
+el.innerHTML=h}
+function needID(cb){if(ID)return cb();
+var box=document.createElement('div');box.className='idbox';
+box.innerHTML='<div class="idcard"><b>Who is voting?</b><input id="idname" placeholder="Your name" maxlength="14"><div class="emojis"></div><button class="btn" id="idok" style="width:100%">That is me</button></div>';
+document.body.appendChild(box);
+var ems=['🦊','🐸','🐨','🦉','🐯','🐰'],sel='🦊';
+var wrap=box.querySelector('.emojis');
+ems.forEach(function(e){var b=document.createElement('button');b.className='em'+(e===sel?' sel':'');b.textContent=e;b.onclick=function(){sel=e;wrap.querySelectorAll('.em').forEach(function(x){x.className='em'});b.className='em sel'};wrap.appendChild(b)});
+box.querySelector('#idok').onclick=function(){var n=box.querySelector('#idname').value.trim();if(!n)return;ID={name:n,emoji:sel};localStorage.setItem('settled_id',JSON.stringify(ID));document.body.removeChild(box);cb()}}
+function vote(decID,optID){needID(function(){
+fetch(API,{method:'POST',body:JSON.stringify({action:'vote',token:T,decision_id:decID,option_id:optID||null,name:ID.name,emoji:ID.emoji})}).then(function(){load()})})}
+function contribute(){var v=document.getElementById('contrib').value.trim();if(!v)return;needID(function(){
+document.getElementById('spotted').innerHTML='<div class="spotted">Reading it…</div>';
+fetch(API,{method:'POST',body:JSON.stringify({action:'contribute',token:T,content:v,name:ID.name,emoji:ID.emoji})}).then(function(r){return r.json()}).then(function(d){
+var s=document.getElementById('spotted');
+if(d.count>0){s.innerHTML='<div class="spotted">Sent ✓ — we spotted: <b>'+d.spotted.map(esc).join(', ')+'</b><br>We will check them before they appear.</div>'}
+else{s.innerHTML='<div class="spotted">Sent to the box ✓</div>'}
+document.getElementById('contrib').value=''}).catch(function(){document.getElementById('spotted').innerHTML='<div class="spotted">Sent to the box ✓</div>'})})}
+load();
+</script></body></html>
