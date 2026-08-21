@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cwjgege.github.io/settled-web/sitemap.xml
